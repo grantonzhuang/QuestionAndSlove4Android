@@ -1,4 +1,22 @@
+# 1 at 2016/06/13
+
+- desc
+> 在 SDK 23 中，Android 官方去掉了 `HttpClient` 等包，项目中引用的 `org.apache.http` 等类库无法导入
+
+- slove
+> 在 module 层级的 `build.gradle` 文件中添加如下代码
+
+```build.gradle
+android {
+    useLibrary 'org.apache.http.legacy'
+}
+```
+
+- reference
+    - [HttpClient won't import in Android Studio](http://stackoverflow.com/questions/32153318/httpclient-wont-import-in-android-studio)
+
 # 0 at 2016/03/08
+
 - desc
 > 在`NestedScrollView`中，使用一个`ScrollAbleView`比如`RecyclerView`的时候，`RecyclerView`不显示。
 
