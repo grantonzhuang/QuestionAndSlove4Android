@@ -19,8 +19,7 @@ public class ClassB {
 ```
 
 - reference
-
-[gson.toJson() throws StackOverflowError](http://stackoverflow.com/questions/10209959/gson-tojson-throws-stackoverflowerror)
+    - [gson.toJson() throws StackOverflowError](http://stackoverflow.com/questions/10209959/gson-tojson-throws-stackoverflowerror)
 
 # 1 at 2016/06/13
 
