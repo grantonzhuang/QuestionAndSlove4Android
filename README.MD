@@ -1,3 +1,28 @@
+# 2 at 2016/07/02
+
+- desc
+> `ClassA` 中持有对 `ClassB` 实例的引用, 同时 `ClassB` 中持有对 `ClassA` 的引用, 对 `ClassA` 或者 `ClassB` 的实例使用 `Gson.toJson()` 方法, 会引起 `StackOverflowError`
+
+- slove
+
+> 使用 `transient` 关键字将相应的成员变量排除
+
+```java
+public class ClassA {
+    transient ClassB instance;
+}
+```
+
+```java
+public class ClassB {
+    transient ClassA instance;
+}
+```
+
+- reference
+
+[gson.toJson() throws StackOverflowError](http://stackoverflow.com/questions/10209959/gson-tojson-throws-stackoverflowerror)
+
 # 1 at 2016/06/13
 
 - desc
