@@ -4,7 +4,6 @@
 > `ClassA` 中持有对 `ClassB` 实例的引用, 同时 `ClassB` 中持有对 `ClassA` 的引用, 对 `ClassA` 或者 `ClassB` 的实例使用 `Gson.toJson()` 方法, 会引起 `StackOverflowError`
 
 - slove
-
 > 使用 `transient` 关键字将相应的成员变量排除
 
 ```java
