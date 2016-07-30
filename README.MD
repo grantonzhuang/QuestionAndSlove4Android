@@ -1,3 +1,40 @@
+# 3 at 2016/07/30
+
+- desc
+
+> 在 recyclerView 中使用 swtich 控件的时候，遇到 `Recycleview notifyDataSetChanged() IllegalStateException`
+
+- why
+
+> You should move method 'setOnCheckedChangeListener()' to ViewHolder which is inner class on your adapter.
+
+> onBindViewHolder() is not a method that initialize ViewHolder. This method is step of refresh each recycler item. When you call notifyDataSetChanged(), onBindViewHolder() will be called as the number of each item times.
+
+> So If you notifyDataSetChanged() put into onCheckChanged() and initialize checkBox in onBindViewHolder(), you will get IllegalStateException because of circular method call.
+
+> click checkbox -> onCheckedChanged() -> notifyDataSetChanged() -> onBindViewHolder() -> set checkbox -> onChecked...
+
+- resolve
+
+```java
+private boolean onBind;
+
+@Override
+public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    if (onbind) {
+        return;
+    }
+    // other opts
+}
+
+@Override
+public void onBindViewHolder(YourAdapter.ViewHolder viewHolder, int position) {
+    onBind = true;
+    bind(holder, view);
+    onBind = false;
+}
+```
+
 # 2 at 2016/07/02
 
 - desc
