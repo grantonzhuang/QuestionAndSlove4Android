@@ -35,6 +35,9 @@ public void onBindViewHolder(YourAdapter.ViewHolder viewHolder, int position) {
 }
 ```
 
+- reference
+    - [Recycleview notifyDataSetChanged() IllegalStateException](http://stackoverflow.com/questions/27070220/recycleview-notifydatasetchanged-illegalstateexception)
+
 # 2 at 2016/07/02
 
 - desc
