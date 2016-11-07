@@ -1,3 +1,50 @@
+# 4 at 2016/11/07
+
+- desc
+
+> 在使用 CollapsingToolbarLayout 包含一个 ToolBar，实现一个 “收缩设置标题，展开隐藏标题” 的需求的时候，收缩和展开的时候，出现了如下警告
+
+```
+requestLayout() improperly called by android.support.design.widget.CollapsingToolbarLayout
+```
+
+- why
+
+代码如下，这个监听会一直调用，如果不加上判断，会一直要求重新绘制 CollapsingToolbarLayout 或者 ToolBar，所以出现警告
+
+```java
+@Override
+public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+    int maxScroll = appBarLayout.getTotalScrollRange();
+    float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
+    if (percentage == 1) {
+        if (getSupportActionBar() == null) {
+            return;
+        }
+        getSupportActionBar().setTitle(R.string.title);
+    } else {
+        collapsingToolbarLayout.setTitle("");
+    }
+}
+```
+
+- reslove 加上对标题是否非空的判断即可
+
+```java
+if (percentage == 1) {
+    if (getSupportActionBar() == null) {
+        return;
+    }
+    if (TextUtils.isEmpty(collapsingToolbarLayout.getTitle())) {
+        getSupportActionBar().setTitle(R.string.title);
+    }
+} else {
+    if (!TextUtils.isEmpty(collapsingToolbarLayout.getTitle())) {
+        collapsingToolbarLayout.setTitle("");
+    }
+}
+```
+
 # 3 at 2016/07/30
 
 - desc
