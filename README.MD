@@ -1,3 +1,32 @@
+# 5 at 2016/11/08
+
+- desc
+
+> 使用 intent 调用 Android 的相机拍照的时候，返回的 uri 为 null。
+
+```java
+Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+startActivityForResult(cameraIntent, 1000);
+
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    Uri uri = data.getData();
+    // uri is null sometimes
+}
+```
+
+- reslove
+
+> 换成 getExtras() 方法可以获得正确的数据，如果要获取文件的 uri，可以先在 intent 中指定 uri。参考[官方文档](https://developer.android.com/training/camera/photobasics.html#TaskCaptureIntent)
+
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    Bundle bundle = data.getExtras();
+    Bitmap bitmap = bundle.get("data");
+}
+```
+
 # 4 at 2016/11/07
 
 - desc
