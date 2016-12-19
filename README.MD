@@ -1,3 +1,37 @@
+# 6 at 2016/12/19
+
+- desc
+
+> 在 selector 的资源文件中使用 9 图，显示不正常
+
+```xml
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <bitmap android:src="@drawable/bg_common_btn_pressed" />
+    </item>
+
+    <item android:state_pressed="false">
+        <bitmap android:src="@drawable/bg_common_btn_normal" />
+    </item>
+
+</selector>
+```
+
+- reslove
+
+应该指定为 drawable 而不是 bitmap
+
+```xml
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/bg_common_btn_pressed" android:state_pressed="true" />
+
+    <item android:drawable="@drawable/bg_common_btn_normal" android:state_pressed="false" />
+
+</selector>
+```
+
 # 5 at 2016/11/08
 
 - desc
